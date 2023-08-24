@@ -1,0 +1,10 @@
+.container {
+    border: solid 1px black;
+    text-align: center;
+    width: 50vw;
+}
+ 
+td, th {
+    border: solid 1px black;
+    padding: 1%;
+}
