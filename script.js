@@ -1,4 +1,5 @@
 const container = document.querySelector('.container');
+const average = document.querySelector('.average');
 const names = ["Dr. Slice", "Dr. Pressure", "Prof. Possibility", "Prof. Prism",
     "Dr. Impulse", "Prof. Spark", "Dr. Wire", "Prof. Goose"];
 const jobs = ["Gardener", "Writer", "Teacher", "Programmer", "Driver"];
@@ -23,6 +24,18 @@ const freeLancers = [
     randomFreelancer(),
 ];
 
+function getAverage() {
+    let sum = 0;
+    let avg = 0;
+    freeLancers.forEach((worker) => {
+        sum += worker.price;
+    });
+    avg = Math.round(sum / freeLancers.length);
+    let avgOut = `<h3>The average starting price is $${avg}</h3>`
+
+    average.innerHTML = avgOut;
+}
+
 function render() {
     const html = freeLancers.map((worker) => {
         return `<tr>
@@ -31,7 +44,8 @@ function render() {
                 <td>$${worker.price}</td></tr>
                 `;
     });
-    container.innerHTML = `<tr><th>Name</th><th>Occupation</th><th>Price</th></tr>` + html.join('');
+    container.innerHTML = `<tr><th>Name</th><th>Occupation</th><th>Starting Price</th></tr>` + html.join('');
+
 }
 
 
@@ -39,12 +53,11 @@ const i = setInterval(() => {
     const addListing = randomFreelancer();
     freeLancers.push(addListing);
     render();
-    if (freeLancers.length === 5) {
+    getAverage();
+    if (freeLancers.length === 15) {
         clearInterval(i);
     }
 }, 2000);
 
-
-
-
+getAverage();
 render();
